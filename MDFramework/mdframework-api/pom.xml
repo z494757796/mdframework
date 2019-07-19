@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>mdframework-api</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+
+	<name>mdframework-api</name>
+	<description>mdframework-api</description>
+
+	<parent>
+		<groupId>cn.mdsoftware.mdframework</groupId>
+		<artifactId>mdframework-parent</artifactId>
+		<version>1.0</version>
+		<relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>cn.mdsoftware.mdframework</groupId>
+			<artifactId>mdframework-wechat</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>mdframework-api</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!--<configuration>
+					<layout>ZIP</layout>
+
+					<excludeGroupIds>
+						org.springframework.boot,
+						net.sourceforge.nekohtml,
+						mysql,
+						com.alibaba,
+						org.apache.commons,
+						commons-beanutils,
+						commons-codec,
+						commons-configuration,
+						commons-io,
+						org.apache.shiro,，
+						com.github.theborakompanioni,
+						com.alibaba,
+						org.apache.velocity,
+						net.sf.ehcache,
+						com.github.tobato,
+						org.springframework.boot,
+						org.hibernate,
+						commons-httpclient,
+						dom4j,
+						com.google.zxing,
+						cn.songxinqiang,
+						aspectjweaver,
+						classmate,
+						commons-collections,
+						commons-fileupload,
+						commons-lang,
+						commons-logging,
+						groovy-2.4.12,
+						hamcrest-core,
+						jackson-annotations,
+						jackson-core,
+						jackson-databind,
+						javassist,
+						jboss-logging,
+						jcl-over-slf4j,
+						jedis,
+						json,
+						jul-to-slf4j,
+						junit,
+						org.aspectj,
+						com.fasterxml,
+						org.codehaus.groovy,
+						org.hamcrest,
+						jackson-annotations,
+						com.fasterxml.jackson.core,
+						com.fasterxml.jackson.core,
+						com.fasterxml.jackson.core,
+						org.javassist,
+						org.jboss.logging,
+						org.slf4j,
+						redis.clients,
+						org.json,
+						org.slf4j,
+						ch.qos.logback,
+						org.mockito,
+						org.mybatis,
+						ognl,
+						org.yaml,
+						org.springframework,
+						net.coobird,
+						org.thymeleaf,
+						org.apache.tomcat.embed,
+						org.unbescape,
+						javax.validation,
+						xerces,
+						xml-apis,
+						org.mybatis.spring.boot,
+						org.springframework.data,
+						nz.net.ultraq.thymeleaf,
+						org.apache.tomcat,
+						com.github.theborakompanioni,
+						joda-time,
+						org.apache.httpcomponents,
+						com.github.pagehelper,
+						com.github.jsqlparser,
+						com.google.guava,
+						com.fasterxml.woodsto,
+						org.codehaus.woodstox,
+						com.fasterxml.jackson.module,
+						com.fasterxml.jackson.dataformat,
+						org.bouncycastle,
+						com.fasterxml.woodstox
+					</excludeGroupIds>
+				</configuration>-->
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>application.properties</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

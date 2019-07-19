@@ -1,0 +1,175 @@
+<head th:fragment="header">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet"
+		  href="/css/plugins/jqTreeGrid/jquery.treegrid.css">
+	<link href="css/bootstrap.min.css?v=3.3.6"
+		  th:href="@{/css/bootstrap.min.css?v=3.3.6}" rel="stylesheet">
+	<link href="css/font-awesome.css?v=4.4.0"
+		  th:href="@{/css/font-awesome.css?v=4.4.0}" rel="stylesheet">
+	<link href="css/plugins/bootstrap-table/bootstrap-table.min.css"
+		  th:href="@{/css/plugins/bootstrap-table/bootstrap-table.min.css}"
+		  rel="stylesheet">
+	<link href="css/animate.css" th:href="@{/css/animate.css}"
+		  rel="stylesheet">
+	<link href="/css/plugins/jsTree/style.min.css" rel="stylesheet">
+	<link href="/css/plugins/jqTreeGrid/jquery.treegrid.css"
+		  rel="stylesheet">
+	<link href="/js/plugins/jqTreeGrid/jquery.treegrid.css" rel="stylesheet">
+
+	<!--<link href="/css/plugins/summernote/summernote.css" rel="stylesheet">-->
+	<!--<link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">-->
+	<link href="/css/style.css?v=4.1.0" th:href="@{/css/style.css?v=4.1.0}"
+		  rel="stylesheet">
+	<link href="/css/style.css?v=4.1.0" th:href="@{/css/chosen.css?v=4.1.0}"
+		  rel="stylesheet">
+
+
+	<link href="/css/bootstrap-datetimepicker.min.css" th:href="@{/css/bootstrap-datetimepicker.min.css}"
+		  rel="stylesheet"/>
+	<link th:href="@{/css/plugins/treeview/bootstrap-treeview.css}" rel="stylesheet">
+	<!--排序参数-->
+	<style>
+		.fixed-table-container thead th .sortable{
+			background-image:url('/css/plugins/images/sort_asc.png');cursor:pointer;background-position:right;background-repeat:no-repeat;padding-right:30px
+		}
+		.fixed-table-container thead th .asc{
+			background-image:url('css/plugins/images/sort_asc.png');cursor:pointer;background-position:right;background-repeat:no-repeat;padding-right:30px
+		}
+		.fixed-table-container thead th .desc{
+			background-image:url('css/plugins/images/sort_desc.png');cursor:pointer;background-position:right;background-repeat:no-repeat;padding-right:30px
+		}
+	</style>
+
+    <style type="text/css">
+        #imgs:hover{
+            cursor: pointer;
+        }
+        .commonWebUploader .statusBar .btns .addFileBtn{
+            position:relative!important;
+        }
+        #moduleGallery{
+            padding: 4px 0px 0px 4px;
+            border-bottom: 1px solid #dadada;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<div th:fragment="footer">
+	<!-- 全局js -->
+	<script src="/js/jquery.min.js?v=2.1.4"></script>
+	<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+	<!-- 自定义js -->
+	<script src="/js/content.js?v=1.0.0"></script>
+
+	<!-- Bootstrap table -->
+	<script src="/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script
+			src="/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+	<!-- Peity -->
+	<!-- <script src="/js/demo/bootstrap-table-demo.js"></script> -->
+	<!-- jQuery Validation plugin javascript -->
+	<script src="/js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="/js/plugins/validate/messages_zh.min.js"></script>
+
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script src="/js/plugins/layer/extend/layer.ext.js"></script>
+
+	<script src="/js/plugins/jsTree/jstree.min.js"></script>
+
+	<script src="/js/plugins/jqTreeGrid/jquery.treegrid.min.js"></script>
+	<script src="/js/plugins/jqTreeGrid/jquery.treegrid.extension.js"></script>
+	<script src="/js/plugins/jqTreeGrid/jquery.treegrid.bootstrap3.js"></script>
+
+	<!--ueditor-->
+	<script type="text/javascript" charset="utf-8" src="/js/plugins/ueditor1.4.3.3/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/js/plugins/ueditor1.4.3.3/ueditor.all.min.js"> </script>
+	<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+	<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+	<script type="text/javascript" charset="utf-8" src="/js/plugins/ueditor1.4.3.3/lang/zh-cn/zh-cn.js"></script>
+
+	<script src="/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <!-- 富文本 -->
+    <script type="text/javascript" src="/js/plugins/ckeditor/ckeditor.js"></script>
+
+	<script src="/js/appjs/common/common.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/js/plugins/webuploader/webuploader.css">
+	<script th:inline="javascript">
+        var BASE_URL = '/js/plugins/webuploader';
+        var UPLOAD_URI = [[${session.fileBaseUpload}]];
+</script>
+	<script src="/js/plugins/webuploader/webuploader.js"></script>
+    <script src="/js/plugins/treeview/bootstrap-treeview.js"></script>
+	<script type="text/javascript">
+
+        function initPickArea(container,format,width,height){
+            $("#" + container).pickArea({
+                "format":format || "province/city/county", //格式
+                "width": width || "420",//设置“省市县”文本边框的宽度
+                "height":height || "34",//设置“省市县”文本边框的高度
+                "borderColor":"#E5E6E7",//设置“省市县”文本边框的色值
+                "arrowColor":"#686B6D",//设置下拉箭头颜色
+                "listBdColor":"#E5E6E7",//设置下拉框父元素ul的border色值
+                "color":"#686B6D",//设置“省市县”字体颜色
+                "fontSize":"14px",//设置字体大小
+                "hoverColor":"#1E90FF",
+                "paddingLeft":"30px",//设置“省”位置处的span相较于边框的距离
+                "arrowRight":"30px",//设置下拉箭头距离边框右侧的距离
+                "maxHeight":"300px",
+                //"preSet":"",//数据初始化 ；这里的数据初始化有两种方式，第一种是用preSet属性设置，第二种是在a标签里使用name属性设置
+                "getVal":function(){//这个方法是每次选中一个省、市或者县之后，执行的方法
+                    //console.log($(".pick-area-hidden").val())
+                    //console.log($(".pick-area-dom").val())
+                    var thisdom = $("."+$(".pick-area-dom").val());//返回的是调用这个插件的元素pick-area，$(".pick-area-dom").val()的值是该元素的另一个class名，这个class名在dom结构中是唯一的，不会有重复，可以通过这个class名来识别这个pick-area
+                    thisdom.next().val($(".pick-area-hidden").val());//$(".pick-area-hidden").val()是页面中隐藏域的值，存放着每次选中一个省、市或者县的时候，当前文本存放的省市县的最新值，每点击一次下拉框里的li，这个值就会立即更新
+                }
+            });
+
+        }
+
+        $('.form_datetime').datetimepicker({
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+            defaultDate : new Date()
+        });
+        $('.form_date').datetimepicker({
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            defaultDate : new Date()
+        });
+        $('.form_time').datetimepicker({
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0,
+            defaultDate : new Date()
+        });
+        $( '.form_datetime' ).datetimepicker( 'setDate' , new Date());
+        $( '.form_time' ).datetimepicker( 'setDate' , new Date());
+	</script>
+</div>

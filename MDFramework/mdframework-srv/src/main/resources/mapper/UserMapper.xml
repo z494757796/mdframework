@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.mdsoftware.mdframework.dao.UserDao">
+
+    <sql id="Base_Column_List">
+        obj.*,org.name AS organizationName
+    </sql>
+    <sql id="Join_Sql">
+        LEFT OUTER JOIN sys_organization_info org ON org.id=obj.organization_id
+    </sql>
+
+    <select id="get" resultType="cn.mdsoftware.mdframework.bean.entity.UserDO">
+        select
+        <include refid="Base_Column_List" />
+        from sys_user obj
+        <include refid="Join_Sql" />
+        where obj.user_id = #{value}
+    </select>
+
+    <select id="list" resultType="cn.mdsoftware.mdframework.bean.entity.UserDO">
+        select
+        <include refid="Base_Column_List" />
+        from sys_user obj
+        <include refid="Join_Sql" />
+        <where>
+            <if test="userId != null and userId != ''"> and obj.user_id = #{userId} </if>
+            <if test="username != null and username != ''"> and obj.username = #{username} </if>
+            <if test="password != null and password != ''"> and obj.password = #{password} </if>
+            <if test="email != null and email != ''"> and obj.email = #{email} </if>
+            <if test="mobile != null and mobile != ''"> and obj.mobile = #{mobile} </if>
+            <if test="status != null and status != ''"> and obj.status = #{status} </if>
+            <if test="userIdCreate != null and userIdCreate != ''"> and obj.user_id_create = #{userIdCreate} </if>
+            <if test="name != null and name != ''"> and obj.name = #{name} </if>
+            <if test="searchWord != null and searchWord != ''"> and (obj.name like CONCAT('%',#{searchWord},'%'))</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by user_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="java.lang.Integer" parameterType="hashmap">
+        select count(*) from sys_user obj
+        <include refid="Join_Sql" />
+        <where>
+            <if test="userId != null and userId != ''"> and obj.user_id = #{userId} </if>
+            <if test="username != null and username != ''"> and obj.username = #{username} </if>
+            <if test="password != null and password != ''"> and obj.password = #{password} </if>
+            <if test="email != null and email != ''"> and obj.email = #{email} </if>
+            <if test="mobile != null and mobile != ''"> and obj.mobile = #{mobile} </if>
+            <if test="status != null and status != ''"> and obj.status = #{status} </if>
+            <if test="userIdCreate != null and userIdCreate != ''"> and obj.user_id_create = #{userIdCreate} </if>
+            <if test="name != null and name != ''"> and obj.name = #{name} </if>
+            <if test="searchWord != null and searchWord != ''"> and (obj.name like CONCAT('%',#{searchWord},'%'))</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="cn.mdsoftware.mdframework.bean.entity.UserDO" useGeneratedKeys="true" keyProperty="userId">
+		insert into sys_user
+		(
+			`username`,
+			`password`,
+			`email`,
+			`mobile`,
+			`status`,
+			`user_id_create`,
+			`gmt_create`,
+			`gmt_modified`,
+			`name`,
+			`organization_id`
+		)
+		values
+		(
+			#{username},
+			#{password},
+			#{email},
+			#{mobile},
+			#{status},
+			#{userIdCreate},
+			#{gmtCreate},
+			#{gmtModified},
+			#{name},
+			#{organizationId}
+		)
+	</insert>
+
+    <update id="update" parameterType="cn.mdsoftware.mdframework.bean.entity.UserDO">
+        update sys_user
+        <set>
+            <if test="username != null">`username` = #{username}, </if>
+            <if test="password != null">`password` = #{password}, </if>
+            <if test="email != null">`email` = #{email}, </if>
+            <if test="mobile != null">`mobile` = #{mobile}, </if>
+            <if test="status != null">`status` = #{status}, </if>
+            <if test="userIdCreate != null">`user_id_create` = #{userIdCreate}, </if>
+            <if test="gmtCreate != null">`gmt_create` = #{gmtCreate}, </if>
+            <if test="gmtModified != null">`gmt_modified` = #{gmtModified}, </if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="organizationId != null">`organization_id` = #{organizationId}</if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="remove">
+		delete from sys_user where user_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from sys_user where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+</mapper>

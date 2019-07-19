@@ -1,0 +1,116 @@
+package ${package}.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import ${package}.common.annotation.JSON;
+import ${package}.common.enums.HttpResponseEnum;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ${package}.common.utils.PageUtils;
+import ${package}.common.utils.Query;
+import ${package}.common.utils.R;
+import org.springframework.ui.Model;
+import ${package}.bean.api.HttpResponse;
+
+import ${package}.bean.entity.${className}DO;
+import ${package}.service.${className}Service;
+
+
+/**
+ * ${comments}接口控制器
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Controller
+@RequestMapping("/${classname}")
+public class ${className}Controller {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(${className}Controller.class);
+
+	@Autowired
+	private ${className}Service ${classname}Service;
+
+    @GetMapping("/list")
+    @JSON(type = ${className}DO.class,include = "")
+    public HttpResponse<PageInfo> list(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+                                       @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
+        try{
+            return ${classname}Service.listByWhere(pageNum,pageSize);
+        }catch (Exception e){
+            e.printStackTrace();
+            LOGGER.error("query ${classname} list system error");
+        }
+        return HttpResponse.createByError();
+    }
+
+   /**
+    * 新增数据
+    * @author ${author}
+    * @date ${datetime}
+    */
+    @PostMapping("/save")
+    @ResponseBody
+    public HttpResponse save(${className}DO ${classname}){
+        try{
+            return ${classname}Service.save${className}(${classname});
+        }catch (Exception e){
+            LOGGER.error("insert ${classname} error",e);
+        }
+        return HttpResponse.createByErrorResponseEnum(HttpResponseEnum.SYSTEM_ERROR);
+    }
+
+
+    /**
+    * 获取数据详情
+    * @author ${author}
+    * @date ${datetime}
+    */
+    @GetMapping("/info/{id}")
+    @JSON(type = ${className}DO.class,include = "")
+    public HttpResponse get(@PathVariable("id") ${pk.attrType} ${pk.attrname}){
+        try{
+            return ${classname}Service.get${className}(${pk.attrname});
+        }catch (Exception e){
+            LOGGER.error("query ${classname} list system error , errorMsg",e);
+        }
+        return HttpResponse.createByErrorResponseEnum(HttpResponseEnum.SYSTEM_ERROR);
+    }
+
+   /**
+    * 更新数据
+    * @author ${author}
+    * @date ${datetime}
+    */
+    @PostMapping("/update")
+    @ResponseBody
+    public HttpResponse update(${className}DO ${classname}){
+        try{
+            return ${classname}Service.update${className}(${classname});
+        }catch (Exception e){
+            LOGGER.error("update ${classname} error ,errorMsg",e);
+        }
+        return HttpResponse.createByErrorResponseEnum(HttpResponseEnum.SYSTEM_ERROR);
+    }
+
+    /**
+    * 删除数据
+    * @author ${author}
+    * @date ${datetime}
+    */
+    @PostMapping("/delete/{id}")
+    @ResponseBody
+    public HttpResponse delete(@PathVariable("id")${pk.attrType} ${pk.attrname}){
+        try{
+            return ${classname}Service.delete${className}(${pk.attrname});
+        }catch (Exception e){
+            LOGGER.error("delete ${classname} error ,errorMsg",e);
+        }
+        return HttpResponse.createByErrorResponseEnum(HttpResponseEnum.SYSTEM_ERROR);
+    }
+	
+}

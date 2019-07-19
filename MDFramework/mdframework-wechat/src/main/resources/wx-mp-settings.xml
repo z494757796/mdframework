@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AppSetting>
+    <!--正式
+    <appId>wx868e9c33ad335405</appId>
+    <secret>4a04be5f1b24dbfccdc842f000e955f3</secret>
+    <token>wonskd113n</token>
+    <aesKey>lRE3qfnBHxqzBE5i12v6CzU257ERsOIeMKqfDPdFu5c</aesKey>-->
+
+    <!--测试-->
+    <appId>wxb9e41077791d3fdf</appId>
+    <secret>e5c91d7b71fc507b0b5c62ece51f91b6</secret>
+    <token>wonskd113n</token>
+    <aesKey>lRE3qfnBHxqzBE5i12v6CzU257ERsOIeMKqfDPdFu5c</aesKey>
+
+
+    <!-- 可以指定自己的tokenHolderClass，继承com.riversoft.weixin.common.AccessTokenHolder-->
+   <!-- <tokenHolderClass>cn.mdsoftware.mdframework.handler.MdAccessTokenHolder</tokenHolderClass>-->
+
+</AppSetting>

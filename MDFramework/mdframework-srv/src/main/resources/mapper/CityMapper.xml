@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.mdsoftware.mdframework.dao.CityDao">
+     <sql id="Base_Column_List">
+    		obj.*
+    	</sql>
+    	<sql id="Join_Sql">
+    	</sql>
+       <sql id="Criteria_Sql">
+            <where>
+                            <if test="id != null and id != ''"> and obj.id = #{id} </if>
+                            <if test="fatherid != null and fatherid != ''"> and obj.fatherid = #{fatherid} </if>
+                            <if test="cityid != null and cityid != ''"> and obj.cityid = #{cityid} </if>
+                            <if test="city != null and city != ''"> and obj.city = #{city} </if>
+                          </where>
+       </sql>
+
+	<select id="get" resultType="cn.mdsoftware.mdframework.bean.entity.CityDO">
+		select
+		<include refid="Base_Column_List" />
+		from city obj
+		<include refid="Join_Sql" />
+		where obj.id = #{value}
+	</select>
+
+	<select id="list" resultType="cn.mdsoftware.mdframework.bean.entity.CityDO">
+		select
+		    <include refid="Base_Column_List" />
+		from city obj
+       <include refid="Join_Sql" />
+       <include refid="Criteria_Sql" />
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by obj.${sort} ${order}
+            </when>
+			<otherwise>
+                order by obj.id desc
+			</otherwise>
+        </choose>
+	</select>
+
+ 	<select id="count" resultType="int">
+		select count(1) from city obj
+		<include refid="Join_Sql" />
+		<include refid="Criteria_Sql" />
+	</select>
+
+	<insert id="save" parameterType="cn.mdsoftware.mdframework.bean.entity.CityDO" useGeneratedKeys="true" keyProperty="id">
+		insert into city
+		(
+			`fatherid`, 
+			`cityid`, 
+			`city`
+		)
+		values
+		(
+			#{fatherid}, 
+			#{cityid}, 
+			#{city}
+		)
+	</insert>
+
+	<update id="update" parameterType="cn.mdsoftware.mdframework.bean.entity.CityDO">
+		update city
+		<set>
+			<if test="fatherid != null">`fatherid` = #{fatherid}, </if>
+			<if test="cityid != null">`cityid` = #{cityid}, </if>
+			<if test="city != null">`city` = #{city}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="remove">
+		update city set del_status=0 where id = #{value}
+	</update>
+
+	<update id="batchRemove">
+		update city set del_status=0  where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+</mapper>

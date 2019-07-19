@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AppSetting>
+    <!--化妆间正式小程序-->
+    <!--<appId>wxa95f9b307353de6e</appId>-->
+    <!--<secret>a436b560acc778b32c57c1c92b45a74d</secret>-->
+    <!--<token>wonskd113n</token>-->
+    <!--<aesKey>lRE3qfnBHxqzBE5i12v6CzU257ERsOIeMKqfDPdFu5c</aesKey>-->
+
+
+    <!--米袋软件+-->
+    <appId>wxa95f9b307353de6e</appId>
+    <secret>a436b560acc778b32c57c1c92b45a74d</secret>
+    <token>wonskd113n</token>
+    <aesKey>lRE3qfnBHxqzBE5i12v6CzU257ERsOIeMKqfDPdFu5c</aesKey>
+<!--
+    <appId>wxd0e2669443c1552e</appId>
+    <secret>39536761bee207cd598a2e73305f2651</secret>
+    <token>wonskd113n</token>
+    <aesKey>lRE3qfnBHxqzBE5i12v6CzU257ERsOIeMKqfDPdFu5c</aesKey>
+-->
+
+</AppSetting>

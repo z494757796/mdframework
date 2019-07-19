@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                                                                                    <input id="id" name="id"
+                                       th:value="${organizationInfo.id}" type="hidden">
+                                                                                                                                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">父级id：</label>
+                                        <div class="col-sm-8">
+                                            <input id="parentId" name="parentId"
+                                                   th:value="${organizationInfo.parentId}" class="form-control"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                                                                                                                                                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">所有父级id：</label>
+                                        <div class="col-sm-8">
+                                            <input id="allParentIds" name="allParentIds"
+                                                   th:value="${organizationInfo.allParentIds}" class="form-control"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                                                                                                                                                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">名称：</label>
+                                        <div class="col-sm-8">
+                                            <input id="name" name="name"
+                                                   th:value="${organizationInfo.name}" class="form-control"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">状态:</label>
+                                        <div class="col-sm-8">
+                                            <label class="radio-inline"> <input
+                                                    th:field="*{organizationInfo.status}" type="radio"
+                                                    name="status" value="1"/>
+                                                正常
+                                            </label> <label class="radio-inline"> <input
+                                                th:field="*{organizationInfo.status}" type="radio" name="status"
+                                                value="0"/>
+                                            禁用
+                                        </label>
+                                        </div>
+                                    </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">排序：</label>
+                            <div class="col-sm-8">
+                                <input id="orderBy" name="orderBy"
+                                       class="form-control" type="number" th:value="${organizationInfo.orderBy}">
+                            </div>
+                        </div>
+                                                                                                                                                                                                                                                            <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/organizationInfo/edit.js">
+</script>
+</body>
+</html>

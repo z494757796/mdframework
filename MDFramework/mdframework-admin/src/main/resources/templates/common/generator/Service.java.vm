@@ -1,0 +1,41 @@
+package ${package}.service;
+
+import ${package}.bean.entity.${className}DO;
+import ${package}.bean.api.HttpResponse;
+import com.github.pagehelper.PageInfo;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Service {
+	
+	${className}DO get(${pk.attrType} ${pk.attrname});
+
+    PageInfo<List<${className}DO>> list(Map<String, Object> map);
+	
+	int count(Map<String, Object> map);
+	
+	int save(${className}DO ${classname});
+	
+	int update(${className}DO ${classname});
+	
+	int remove(${pk.attrType} ${pk.attrname});
+	
+	int batchRemove(${pk.attrType}[] ${pk.attrname}s);
+
+    HttpResponse<PageInfo> listByWhere(Integer pageNum, Integer pageSize);
+
+    HttpResponse save${className}(${className}DO ${classname});
+
+    HttpResponse update${className}(${className}DO ${classname});
+    
+    HttpResponse<${className}DO> get${className}(${pk.attrType} ${pk.attrname});
+
+    HttpResponse delete${className}(${pk.attrType} ${pk.attrname});
+}

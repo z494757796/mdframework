@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.mdsoftware.mdframework.dao.BaseInfoDao">
+
+	<select id="get" resultType="cn.mdsoftware.mdframework.bean.entity.BaseInfoDO">
+		select `id`,`name`,`main_pic`,`phone`,`qq_number`,`about_us`,`pay_amount`,`del_status`,`person_amount`,`brand_amount`,`person_expiry_time`,`brand_expiry_time`,`person_content`,`brand_content` from base_info where id = #{value}
+	</select>
+
+	<select id="list" resultType="cn.mdsoftware.mdframework.bean.entity.BaseInfoDO">
+		select `id`,`name`,`main_pic`,`phone`,`qq_number`,`about_us`,`pay_amount`,`del_status`,`person_amount`,`brand_amount`,`person_expiry_time`,`brand_expiry_time`,`person_content`,`brand_content` from base_info
+        <where>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="mainPic != null and mainPic != ''"> and main_pic = #{mainPic} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="qqNumber != null and qqNumber != ''"> and qq_number = #{qqNumber} </if>
+		  		  <if test="aboutUs != null and aboutUs != ''"> and about_us = #{aboutUs} </if>
+		  		  <if test="payAmount != null and payAmount != ''"> and pay_amount = #{payAmount} </if>
+		  		  <if test="delStatus != null and delStatus != ''"> and del_status = #{delStatus} </if>
+		  		  <if test="personAmount != null and personAmount != ''"> and person_amount = #{personAmount} </if>
+		  		  <if test="brandAmount != null and brandAmount != ''"> and brand_amount = #{brandAmount} </if>
+		  		  <if test="personExpiryTime != null and personExpiryTime != ''"> and person_expiry_time = #{personExpiryTime} </if>
+		  		  <if test="brandExpiryTime != null and brandExpiryTime != ''"> and brand_expiry_time = #{brandExpiryTime} </if>
+		  		  <if test="personContent != null and personContent != ''"> and person_content = #{personContent} </if>
+		  		  <if test="brandContent != null and brandContent != ''"> and brand_content = #{brandContent} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+	</select>
+
+ 	<select id="count" resultType="int">
+		select count(*) from base_info
+		 <where>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="mainPic != null and mainPic != ''"> and main_pic = #{mainPic} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="qqNumber != null and qqNumber != ''"> and qq_number = #{qqNumber} </if>
+		  		  <if test="aboutUs != null and aboutUs != ''"> and about_us = #{aboutUs} </if>
+		  		  <if test="payAmount != null and payAmount != ''"> and pay_amount = #{payAmount} </if>
+		  		  <if test="delStatus != null and delStatus != ''"> and del_status = #{delStatus} </if>
+		  		  <if test="personAmount != null and personAmount != ''"> and person_amount = #{personAmount} </if>
+		  		  <if test="brandAmount != null and brandAmount != ''"> and brand_amount = #{brandAmount} </if>
+		  		  <if test="personExpiryTime != null and personExpiryTime != ''"> and person_expiry_time = #{personExpiryTime} </if>
+		  		  <if test="brandExpiryTime != null and brandExpiryTime != ''"> and brand_expiry_time = #{brandExpiryTime} </if>
+		  		  <if test="personContent != null and personContent != ''"> and person_content = #{personContent} </if>
+		  		  <if test="brandContent != null and brandContent != ''"> and brand_content = #{brandContent} </if>
+		  		</where>
+	</select>
+
+	<insert id="save" parameterType="cn.mdsoftware.mdframework.bean.entity.BaseInfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into base_info
+		(
+			`name`, 
+			`main_pic`, 
+			`about_us`
+		)
+		values
+		(
+			#{name}, 
+			#{mainPic}, 
+			#{aboutUs}
+		)
+	</insert>
+
+	<update id="update" parameterType="cn.mdsoftware.mdframework.bean.entity.BaseInfoDO">
+		update base_info
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="mainPic != null">`main_pic` = #{mainPic}, </if>
+			<if test="aboutUs != null">`about_us` = #{aboutUs} </if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="remove">
+		delete from base_info where id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from base_info where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

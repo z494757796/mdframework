@@ -1,0 +1,142 @@
+package ${package}.controller;
+
+import cn.mdsoftware.mdframework.common.utils.*;
+import cn.mdsoftware.mdframework.common.utils.PageUtils;
+import com.github.pagehelper.PageInfo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import java.util.List;
+import java.util.Map;
+import ${package}.common.utils.PageUtils;
+import ${package}.common.utils.Query;
+import ${package}.common.utils.R;
+import ${package}.bean.entity.${className}DO;
+import ${package}.service.${className}Service;
+
+
+
+
+
+/**
+ * ${comments}后台控制器
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Controller
+@RequestMapping("/${classname}")
+public class ${className}Controller {
+	@Autowired
+	private ${className}Service ${classname}Service;
+	
+	@GetMapping()
+	@RequiresPermissions("${classname}:${classname}")
+	String ${className}(){
+	    return "${classname}/${classname}";
+	}
+
+	/**
+     * 分页获取数据
+     */
+	@ResponseBody
+	@GetMapping("/list")
+	@RequiresPermissions("${classname}:list")
+	public PageUtils list(@RequestParam Map<String, Object> params){
+		//查询列表数据
+        Query query = new Query(params);
+        PageInfo<List<${className}DO>> result = ${classname}Service.list(query);
+		PageUtils pageUtils = new PageUtils(result.getList(), result.getTotal());
+		return pageUtils;
+	}
+
+	/**
+     * 数据详情页面跳转
+     */
+	@GetMapping("/add")
+	//@RequiresPermissions("blog:bComments")
+	String add(){
+	    return "${classname}/add";
+	}
+
+	@GetMapping("/edit/{id}")
+	//@RequiresPermissions("blog:bComments")
+	String edit(Model model, @PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
+		${className}DO ${classname} = ${classname}Service.get(${pk.attrname});
+		model.addAttribute("${classname}", ${classname});
+	    return "${classname}/edit";
+	}
+	/**
+	 * 数据详情
+	 */
+	@RequestMapping("/info/{${pk.attrname}}")
+	@RequiresPermissions("${classname}:info")
+	public R info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
+		${className}DO ${classname} = ${classname}Service.get(${pk.attrname});
+		return R.ok().put("${classname}", ${classname});
+	}
+	
+	/**
+	 * 保存数据
+	 */
+	@ResponseBody
+	@PostMapping("/save")
+	@RequiresPermissions("${classname}:save")
+	public R save( ${className}DO ${classname}){
+        #foreach ($column in $columns)
+        #if($column.attrname == 'createId')
+        ${classname}.setCreateId(ShiroUtils.getUserId().intValue());
+        #end
+        #end
+		if(${classname}Service.save(${classname})>0){
+		    return R.ok();
+		}
+		return R.error();
+	}
+	
+	/**
+	 * 修改数据
+	 */
+	@RequestMapping("/update")
+    @ResponseBody
+	@RequiresPermissions("${classname}:update")
+	public R update(${className}DO ${classname}){
+	    #foreach ($column in $columns)
+        #if($column.attrname == 'updateId')
+        ${classname}.setUpdateId(ShiroUtils.getUserId().intValue());
+        #end
+        #end
+		${classname}Service.update(${classname});
+		return R.ok();
+	}
+	
+	
+	/**
+	 * 删除数据
+	 */
+	@PostMapping( "/remove")
+	@ResponseBody
+	@RequiresPermissions("${classname}:remove")
+	public R remove( ${pk.attrType} ${pk.attrname}){
+		if(${classname}Service.remove(${pk.attrname})>0){
+		return R.ok();
+		}
+		return R.error();
+	}
+	
+	/**
+	 * 批量删除数据
+	 */
+	@PostMapping( "/batchRemove")
+	@ResponseBody
+	@RequiresPermissions("${classname}:remove")
+	public R remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.attrname}s){
+		${classname}Service.batchRemove(${pk.attrname}s);
+		
+		return R.ok();
+	}
+	
+}

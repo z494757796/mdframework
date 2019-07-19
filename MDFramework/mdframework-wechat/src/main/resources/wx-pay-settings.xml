@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PaySetting>
+    <!--化妆间正式小程序-->
+    <!--<appId>wxa95f9b307353de6e</appId>-->
+    <!--<mchId>1514778131</mchId>-->
+    <!--<key>guangzhouyiqikanxinxi18028072149</key>-->
+    <!--<certPath>/usr/local/mdsoftware/wwwroot/HuaZhuangJian/cert/apiclient_cert.p12</certPath>-->
+    <!--<certPassword>1514778131</certPassword>-->
+
+
+
+
+    <!--米袋软件+-->
+    <appId>wx4c803ab65dbd0201</appId>
+    <mchId>1491734452</mchId>
+    <key>mdsoft2017mdsoft2017mdsoft2017md</key>
+    <certPath>/usr/local/mdsoftware/wwwroot/HuaZhuangJian_test/cert/apiclient_cert.p12</certPath>
+    <certPassword>1514778131</certPassword>
+
+    <!--本地-->
+    <!--<certPath>D:\\javaspaces\\HuaZhuangJian\\code\\java\\cert\\apiclient_cert.p12</certPath>-->
+</PaySetting>

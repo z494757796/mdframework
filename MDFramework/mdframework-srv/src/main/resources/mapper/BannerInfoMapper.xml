@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.mdsoftware.mdframework.dao.BannerInfoDao">
+
+	<select id="get" resultType="cn.mdsoftware.mdframework.bean.entity.BannerInfoDO">
+		select `id`,`user_id`,`title`,`main_pic`,`link_url`,`order_by`,`start_time`,`end_time`,`status`,`create_time`,`del_status` from banner_info where id = #{value}
+	</select>
+
+	<select id="list" resultType="cn.mdsoftware.mdframework.bean.entity.BannerInfoDO">
+		select `id`,`user_id`,`title`,`main_pic`,`link_url`,`order_by`,`start_time`,`end_time`,`status`,`create_time`,`del_status` from banner_info
+        <where>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="mainPic != null and mainPic != ''"> and main_pic = #{mainPic} </if>
+		  		  <if test="linkUrl != null and linkUrl != ''"> and link_url = #{linkUrl} </if>
+		  		  <if test="orderBy != null and orderBy != ''"> and order_by = #{orderBy} </if>
+		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
+		  		  <if test="endTime != null and endTime != ''"> and end_time = #{endTime} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="delStatus != null and delStatus != ''"> and del_status = #{delStatus} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+	</select>
+
+ 	<select id="count" resultType="java.lang.Integer">
+		select count(*) from banner_info
+		 <where>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="mainPic != null and mainPic != ''"> and main_pic = #{mainPic} </if>
+		  		  <if test="linkUrl != null and linkUrl != ''"> and link_url = #{linkUrl} </if>
+		  		  <if test="orderBy != null and orderBy != ''"> and order_by = #{orderBy} </if>
+		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
+		  		  <if test="endTime != null and endTime != ''"> and end_time = #{endTime} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="delStatus != null and delStatus != ''"> and del_status = #{delStatus} </if>
+		  		</where>
+	</select>
+
+	<insert id="save" parameterType="cn.mdsoftware.mdframework.bean.entity.BannerInfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into banner_info
+		(
+			`user_id`, 
+			`title`, 
+			`main_pic`, 
+			`link_url`, 
+			`order_by`, 
+			`start_time`, 
+			`end_time`, 
+			`status`, 
+			`create_time`, 
+			`del_status`
+		)
+		values
+		(
+			#{userId}, 
+			#{title}, 
+			#{mainPic}, 
+			#{linkUrl}, 
+			#{orderBy}, 
+			#{startTime}, 
+			#{endTime}, 
+			#{status}, 
+			#{createTime}, 
+			#{delStatus}
+		)
+	</insert>
+
+	<update id="update" parameterType="cn.mdsoftware.mdframework.bean.entity.BannerInfoDO">
+		update banner_info
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="mainPic != null">`main_pic` = #{mainPic}, </if>
+			<if test="linkUrl != null">`link_url` = #{linkUrl}, </if>
+			<if test="orderBy != null">`order_by` = #{orderBy}, </if>
+			<if test="startTime != null">`start_time` = #{startTime}, </if>
+			<if test="endTime != null">`end_time` = #{endTime}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="delStatus != null">`del_status` = #{delStatus}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="remove">
+		delete from banner_info where id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from banner_info where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

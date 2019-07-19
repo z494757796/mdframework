@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.mdsoftware.mdframework.dao.MemberDao">
+     <sql id="Base_Column_List">
+    		obj.*
+    	</sql>
+    	<sql id="Join_Sql">
+</sql>
+       <sql id="Criteria_Sql">
+            <where>and obj.del_status=1
+                            <if test="id != null and id != ''"> and obj.id = #{id} </if>
+                            <if test="name != null and name != ''"> and obj.name = #{name} </if>
+                            <if test="mobile != null and mobile != ''"> and obj.mobile = #{mobile} </if>
+                            <if test="mainPic != null and mainPic != ''"> and obj.main_pic = #{mainPic} </if>
+                            <if test="openId != null and openId != ''"> and obj.open_id = #{openId} </if>
+                            <if test="unionId != null and unionId != ''"> and obj.union_id = #{unionId} </if>
+                            <if test="createTime != null and createTime != ''"> and obj.create_time = #{createTime} </if>
+                            <if test="searchWord != null and searchWord != ''"> and (obj.name like CONCAT(#{'%',map.name,jdbcType= VARCHAR },'%') )</if>
+                          </where>
+       </sql>
+
+	<select id="get" resultType="cn.mdsoftware.mdframework.bean.entity.MemberDO">
+		select
+		<include refid="Base_Column_List" />
+		from t_member obj
+		<include refid="Join_Sql" />
+		where obj.id = #{value}
+	</select>
+
+	<select id="list" resultType="cn.mdsoftware.mdframework.bean.entity.MemberDO">
+		select
+		    <include refid="Base_Column_List" />
+		from t_member obj
+       <include refid="Join_Sql" />
+       <include refid="Criteria_Sql" />
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by obj.${sort} ${order}
+            </when>
+			<otherwise>
+                order by obj.id desc
+			</otherwise>
+        </choose>
+	</select>
+
+ 	<select id="count" resultType="int">
+		select count(1) from t_member obj
+		<include refid="Join_Sql" />
+		<include refid="Criteria_Sql" />
+	</select>
+
+	<insert id="save" parameterType="cn.mdsoftware.mdframework.bean.entity.MemberDO" useGeneratedKeys="true" keyProperty="id">
+		insert into t_member
+		(
+			`name`, 
+			`mobile`, 
+			`main_pic`, 
+			`open_id`, 
+			`union_id`, 
+			`create_time`, 
+			`del_status`
+		)
+		values
+		(
+			#{name}, 
+			#{mobile}, 
+			#{mainPic}, 
+			#{openId}, 
+			#{unionId}, 
+			#{createTime}, 
+			#{delStatus}
+		)
+	</insert>
+
+	<update id="update" parameterType="cn.mdsoftware.mdframework.bean.entity.MemberDO">
+		update t_member
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="mainPic != null">`main_pic` = #{mainPic}, </if>
+			<if test="openId != null">`open_id` = #{openId}, </if>
+			<if test="unionId != null">`union_id` = #{unionId}, </if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="remove">
+		update t_member set del_status=0 where id = #{value}
+	</update>
+
+	<update id="batchRemove">
+		update t_member set del_status=0  where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+</mapper>

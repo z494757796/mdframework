@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${baseInfo.id}" type="hidden">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公司名称：</label>
+                            <div class="col-sm-8">
+                                <input id="name" name="name" th:value="${baseInfo.name}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">logo：</label>
+                            <div class="col-sm-8">
+                                <img th:src="${baseInfo.mainPic}" width="80" height="80" style="cursor:pointer;"  th:onclick="|openPhotos('${baseInfo.mainPic}')|" id="mainPicImg">
+                                <input id="mainPic" name="mainPic" th:value="${baseInfo.mainPic}" class="form-control"
+                                       type="hidden">
+                                <div id="uploader" class="wu-example">
+                                    <!--用来存放文件信息-->
+                                    <div id="thelist" class="uploader-list"></div>
+                                    <div class="btns">
+                                        <div id="picker" style="vertical-align: middle;display: inline-block;"
+                                             onchange="uploader.upload();">选择文件
+                                        </div>
+                                        <!-- <button id="ctlBtn" type="button" class="btn btn-default">开始上传</button>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">认证支付金：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="payAmount" name="payAmount" th:value="${baseInfo.payAmount}"  class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">客服电话：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="phone" name="phone" th:value="${baseInfo.phone}"  class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label">qq号码：</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<input id="qqNumber" name="qqNumber" th:value="${baseInfo.qqNumber}"  class="form-control" type="text">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--1-->
+                        <!--<div class="form-group">
+                            <label class="col-sm-3 control-label">第一档提成比例：</label>
+                            <div class="col-sm-8">
+                                <input id="firstGear" name="firstGear" th:value="${baseInfo.firstGear}"
+                                       class="form-control" type="text" placeholder="请输入0-100提成比例" >
+                            </div>
+                        </div>
+
+&lt;!&ndash;2&ndash;&gt;
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">第二档提成比例：</label>
+                            <div class="col-sm-8">
+                                <input id="secondGear" name="secondGear" th:value="${baseInfo.secondGear}"
+                                       class="form-control" type="text"placeholder="请输入0-100提成比例">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">第三档提成比例：</label>
+                            <div class="col-sm-8">
+                                <input id="thirdGear" name="thirdGear" th:value="${baseInfo.thirdGear}"
+                                       class="form-control" type="text"  placeholder="请输入0-100提成比例"  >
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">个人会员支付金额：</label>
+                            <div class="col-sm-8">
+                                <input id="personAmount" name="personAmount" th:value="${baseInfo.personAmount}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">品牌会员支付金额：</label>
+                            <div class="col-sm-8">
+                                <input id="brandAmount" name="brandAmount" th:value="${baseInfo.brandAmount}"
+                                       class="form-control" type="text">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">个人会员到期时间：</label>
+                            <div class="col-sm-8">
+                                <input id="personExpiryTime" name="personExpiryTime"
+                                       th:value="${baseInfo.personExpiryTime}" class="form-control" type="text"
+                                       placeholder="请用数字输入到期天数" onkeyup="value=value.replace(/[^\d]/g,'')">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">品牌会员到期时间：</label>
+                            <div class="col-sm-8">
+                                <input id="brandExpiryTime" name="brandExpiryTime"
+                                       th:value="${baseInfo.brandExpiryTime}" class="form-control" type="text"
+                                       placeholder="请用数字输入到期天数" onkeyup="value=value.replace(/[^\d]/g,'')">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">提现最低金额：</label>
+                            <div class="col-sm-8">
+                                <input id="minAmount" name="minAmount"
+                                       th:value="${baseInfo.minAmount}" class="form-control" type="text"
+                                       placeholder="提现最低金额">
+                            </div>
+                        </div>
+
+                        &lt;!&ndash;个人会员推广内容&ndash;&gt;
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">个人会员推广内容：</label>
+                            <div class="col-sm-8">
+                                <th:script id="personContent" name="personContent" type="text/plain" style="width:100%;height:500px;" th:utext="${baseInfo.personContent}"></th:script>
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">关于我们：</label>
+                            <div class="col-sm-8">
+                                <th:script id="aboutUs" name="aboutUs" type="text/plain" style="width:100%;height:500px;" th:utext="${baseInfo.aboutUs}"></th:script>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/baseInfo/edit.js">
+</script>
+</body>
+</html>

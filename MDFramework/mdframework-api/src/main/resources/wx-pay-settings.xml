@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PaySetting>
+<appId>wx58e2891cab6faca9</appId>
+<mchId>1512143101</mchId>
+<key>xyyl000201midai2018software20182</key>
+<certPath>D:/Code/MD/HuaZhengDao/code/java/HuaZhengDao/cert/apiclient_cert.p12</certPath>
+<certPassword>1512143101</certPassword>
+</PaySetting>
+

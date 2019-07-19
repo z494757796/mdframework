@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.mdsoftware.mdframework.dao.OrganizationInfoDao">
+     <sql id="Base_Column_List">
+    		obj.*
+    	</sql>
+    	<sql id="Join_Sql">
+    	</sql>
+       <sql id="Criteria_Sql">
+            <where>
+                and obj.del_status=1
+                            <if test="id != null and id != ''"> and obj.id = #{id} </if>
+                            <if test="parentId != null and parentId != ''"> and obj.parent_id = #{parentId} </if>
+                            <if test="allParentIds != null and allParentIds != ''"> and obj.all_parent_ids = #{allParentIds} </if>
+                            <if test="name != null and name != ''"> and obj.name = #{name} </if>
+                            <if test="createId != null and createId != ''"> and obj.create_id = #{createId} </if>
+                            <if test="createTime != null and createTime != ''"> and obj.create_time = #{createTime} </if>
+                            <if test="updateId != null and updateId != ''"> and obj.update_id = #{updateId} </if>
+                            <if test="updateTime != null and updateTime != ''"> and obj.update_time = #{updateTime} </if>
+                            <if test="status != null and status != ''"> and obj.status = #{status} </if>
+                            <if test="delStatus != null and delStatus != ''"> and obj.del_status = #{delStatus} </if>
+                          </where>
+       </sql>
+
+	<select id="get" resultType="cn.mdsoftware.mdframework.bean.entity.OrganizationInfoDO">
+		select
+		<include refid="Base_Column_List" />
+		from sys_organization_info obj
+		<include refid="Join_Sql" />
+		where obj.id = #{value}
+	</select>
+
+	<select id="list" resultType="cn.mdsoftware.mdframework.bean.entity.OrganizationInfoDO">
+		select
+		    <include refid="Base_Column_List" />
+		from sys_organization_info obj
+       <include refid="Join_Sql" />
+       <include refid="Criteria_Sql" />
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by obj.${sort} ${order}
+            </when>
+			<otherwise>
+                order by obj.order_by asc
+			</otherwise>
+        </choose>
+	</select>
+
+ 	<select id="count" resultType="int">
+		select count(1) from sys_organization_info obj
+		<include refid="Join_Sql" />
+		<include refid="Criteria_Sql" />
+	</select>
+
+	<insert id="save" parameterType="cn.mdsoftware.mdframework.bean.entity.OrganizationInfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_organization_info
+		(
+			`parent_id`, 
+			`all_parent_ids`, 
+			`name`, 
+			`create_id`, 
+			`create_time`, 
+			`update_id`, 
+			`update_time`, 
+			`status`, 
+			`del_status`,
+			`order_by`
+		)
+		values
+		(
+			#{parentId}, 
+			#{allParentIds}, 
+			#{name}, 
+			#{createId}, 
+			#{createTime}, 
+			#{updateId}, 
+			#{updateTime}, 
+			#{status}, 
+			#{delStatus},
+			#{orderBy}
+		)
+	</insert>
+
+	<update id="update" parameterType="cn.mdsoftware.mdframework.bean.entity.OrganizationInfoDO">
+		update sys_organization_info
+		<set>
+			<if test="parentId != null">`parent_id` = #{parentId}, </if>
+			<if test="allParentIds != null">`all_parent_ids` = #{allParentIds}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="updateId != null">`update_id` = #{updateId}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="orderBy != null">`order_by` = #{orderBy}, </if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="remove">
+		update sys_organization_info set del_status=0 where id = #{value}
+	</update>
+
+	<update id="batchRemove">
+		update sys_organization_info set del_status=0  where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+</mapper>
